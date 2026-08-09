@@ -1,0 +1,18 @@
+{
+  "name": "event",
+  "version": "1.0.0",
+  "description": "EventPro – Full-stack Event Organization System",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "cd frontend && npm install && npm run build",
+    "server": "cd backend && npm run dev",
+    "client": "cd frontend && npm run dev",
+    "install": "npm install && cd backend && npm install && cd ../frontend && npm install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
