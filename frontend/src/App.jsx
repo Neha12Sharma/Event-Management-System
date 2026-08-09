@@ -8,6 +8,7 @@ import EventDetail from './pages/EventDetail';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import CreateEvent from './pages/CreateEvent';
 import AdminPanel from './pages/admin/AdminPanel';
 
 function ProtectedRoute({ children, adminOnly = false }) {
@@ -25,6 +26,9 @@ function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/events" element={<Events />} />
         <Route path="/events/:id" element={<EventDetail />} />
+        <Route path="/create-event" element={
+          <ProtectedRoute><CreateEvent /></ProtectedRoute>
+        } />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={
@@ -33,6 +37,7 @@ function AppRoutes() {
         <Route path="/admin" element={
           <ProtectedRoute adminOnly><AdminPanel /></ProtectedRoute>
         } />
+
         <Route path="*" element={
           <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
             <h1 style={{ fontSize: '4rem', fontFamily: 'Outfit', fontWeight: 900 }}>404</h1>

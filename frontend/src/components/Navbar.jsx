@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Menu, X, Zap, ChevronDown, User, LayoutDashboard, Settings, LogOut } from 'lucide-react';
+import { Menu, X, Zap, ChevronDown, User, LayoutDashboard, Settings, LogOut, Plus } from 'lucide-react';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -44,6 +44,7 @@ export default function Navbar() {
                 {/* Desktop Nav */}
                 <div className="navbar-links">
                     <Link to="/events" className={`nav-link ${isActive('/events') ? 'active' : ''}`}>Explore Events</Link>
+                    {user && <Link to="/create-event" className={`nav-link ${isActive('/create-event') ? 'active' : ''}`} style={{ color: 'var(--primary-light)', fontWeight: 600 }}>+ Create Event</Link>}
                     {user && <Link to="/dashboard" className={`nav-link ${isActive('/dashboard') ? 'active' : ''}`}>My Tickets</Link>}
                     {isAdmin && <Link to="/admin" className={`nav-link admin-link ${isActive('/admin') ? 'active' : ''}`}>Admin Panel</Link>}
                 </div>
@@ -51,15 +52,23 @@ export default function Navbar() {
                 {/* Auth */}
                 <div className="navbar-auth">
                     {user ? (
-                        <div className="user-menu" onClick={() => setDropdownOpen(o => !o)}>
-                            <div className="user-avatar">{user.name?.[0]?.toUpperCase()}</div>
-                            <span className="user-name">{user.name?.split(' ')[0]}</span>
-                            <ChevronDown size={16} className={`chevron ${dropdownOpen ? 'open' : ''}`} />
-                            {dropdownOpen && (
-                                <div className="dropdown">
-                                    <Link to="/dashboard" className="dropdown-item">
-                                        <LayoutDashboard size={15} /> My Dashboard
-                                    </Link>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                            <Link to="/create-event" className="btn btn-primary btn-sm" style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                                <Plus size={15} /> Host Event
+                            </Link>
+                            <div className="user-menu" onClick={() => setDropdownOpen(o => !o)}>
+                                <div className="user-avatar">{user.name?.[0]?.toUpperCase()}</div>
+                                <span className="user-name">{user.name?.split(' ')[0]}</span>
+                                <ChevronDown size={16} className={`chevron ${dropdownOpen ? 'open' : ''}`} />
+                                {dropdownOpen && (
+                                    <div className="dropdown">
+                                        <Link to="/create-event" className="dropdown-item">
+                                            <Plus size={15} /> Create Event
+                                        </Link>
+                                        <Link to="/dashboard" className="dropdown-item">
+                                            <LayoutDashboard size={15} /> My Dashboard
+                                        </Link>
+
                                     {isAdmin && (
                                         <Link to="/admin" className="dropdown-item">
                                             <Settings size={15} /> Admin Panel
