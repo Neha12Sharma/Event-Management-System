@@ -69,19 +69,21 @@ export default function Navbar() {
                                             <LayoutDashboard size={15} /> My Dashboard
                                         </Link>
 
-                                    {isAdmin && (
-                                        <Link to="/admin" className="dropdown-item">
-                                            <Settings size={15} /> Admin Panel
-                                        </Link>
-                                    )}
-                                    <hr className="dropdown-divider" />
-                                    <button onClick={handleLogout} className="dropdown-item danger">
-                                        <LogOut size={15} /> Log Out
-                                    </button>
-                                </div>
-                            )}
+                                        {isAdmin && (
+                                            <Link to="/admin" className="dropdown-item">
+                                                <Settings size={15} /> Admin Panel
+                                            </Link>
+                                        )}
+                                        <hr className="dropdown-divider" />
+                                        <button onClick={handleLogout} className="dropdown-item danger">
+                                            <LogOut size={15} /> Log Out
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     ) : (
+
                         <div className="auth-buttons">
                             <Link to="/login?admin=true" className="btn btn-outline btn-sm" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.2)' }}>Admin</Link>
                             <Link to="/login" className="btn btn-secondary btn-sm">Log In</Link>
