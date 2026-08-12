@@ -33,7 +33,6 @@ export default function AdminPanel() {
     const [saving, setSaving] = useState(false);
 
     useEffect(() => {
-        if (!isAdmin) { navigate('/'); return; }
         fetchData();
     }, []);
 

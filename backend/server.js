@@ -65,13 +65,12 @@ async function start() {
     try {
         await initDB();
         await seedEvents();
-        app.listen(PORT, () => {
-            console.log(`🚀 Server running on http://localhost:${PORT}`);
-        });
     } catch (err) {
-        console.error('Failed to start server:', err);
-        process.exit(1);
+        console.warn('⚠️ Database initialization skipped (PostgreSQL not running):', err.message);
     }
+    app.listen(PORT, () => {
+        console.log(`🚀 Server running on http://localhost:${PORT}`);
+    });
 }
 
 start();

@@ -44,9 +44,8 @@ export default function Navbar() {
                 {/* Desktop Nav */}
                 <div className="navbar-links">
                     <Link to="/events" className={`nav-link ${isActive('/events') ? 'active' : ''}`}>Explore Events</Link>
-                    {user && <Link to="/create-event" className={`nav-link ${isActive('/create-event') ? 'active' : ''}`} style={{ color: 'var(--primary-light)', fontWeight: 600 }}>+ Create Event</Link>}
-                    {user && <Link to="/dashboard" className={`nav-link ${isActive('/dashboard') ? 'active' : ''}`}>My Tickets</Link>}
-                    {isAdmin && <Link to="/admin" className={`nav-link admin-link ${isActive('/admin') ? 'active' : ''}`}>Admin Panel</Link>}
+                    <Link to="/dashboard" className={`nav-link ${isActive('/dashboard') ? 'active' : ''}`}>👤 User Portal</Link>
+                    <Link to="/admin" className={`nav-link admin-link ${isActive('/admin') ? 'active' : ''}`}>👑 Admin Portal</Link>
                 </div>
 
                 {/* Auth */}
@@ -62,18 +61,15 @@ export default function Navbar() {
                                 <ChevronDown size={16} className={`chevron ${dropdownOpen ? 'open' : ''}`} />
                                 {dropdownOpen && (
                                     <div className="dropdown">
+                                        <Link to="/dashboard" className="dropdown-item">
+                                            <LayoutDashboard size={15} /> 👤 User Portal
+                                        </Link>
+                                        <Link to="/admin" className="dropdown-item">
+                                            <Settings size={15} /> 👑 Admin Portal
+                                        </Link>
                                         <Link to="/create-event" className="dropdown-item">
                                             <Plus size={15} /> Create Event
                                         </Link>
-                                        <Link to="/dashboard" className="dropdown-item">
-                                            <LayoutDashboard size={15} /> My Dashboard
-                                        </Link>
-
-                                        {isAdmin && (
-                                            <Link to="/admin" className="dropdown-item">
-                                                <Settings size={15} /> Admin Panel
-                                            </Link>
-                                        )}
                                         <hr className="dropdown-divider" />
                                         <button onClick={handleLogout} className="dropdown-item danger">
                                             <LogOut size={15} /> Log Out
@@ -85,7 +81,8 @@ export default function Navbar() {
                     ) : (
 
                         <div className="auth-buttons">
-                            <Link to="/login?admin=true" className="btn btn-outline btn-sm" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.2)' }}>Admin</Link>
+                            <Link to="/dashboard" className="btn btn-outline btn-sm" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.2)' }}>👤 User Portal</Link>
+                            <Link to="/admin" className="btn btn-outline btn-sm" style={{ color: 'var(--primary-light)', borderColor: 'var(--primary)' }}>👑 Admin Portal</Link>
                             <Link to="/login" className="btn btn-secondary btn-sm">Log In</Link>
                             <Link to="/register" className="btn btn-primary btn-sm">Sign Up</Link>
                         </div>
@@ -102,8 +99,8 @@ export default function Navbar() {
             {mobileOpen && (
                 <div className="mobile-menu">
                     <Link to="/events" className="mobile-link">Explore Events</Link>
-                    {user && <Link to="/dashboard" className="mobile-link">My Tickets</Link>}
-                    {isAdmin && <Link to="/admin" className="mobile-link">Admin Panel</Link>}
+                    <Link to="/dashboard" className="mobile-link">👤 User Portal</Link>
+                    <Link to="/admin" className="mobile-link">👑 Admin Portal</Link>
                     {user ? (
                         <button onClick={handleLogout} className="mobile-link danger-link">Log Out</button>
                     ) : (

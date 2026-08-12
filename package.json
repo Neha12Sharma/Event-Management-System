@@ -7,7 +7,7 @@
     "build": "cd frontend && npm install && npm run build",
     "server": "cd backend && npm run dev",
     "client": "cd frontend && npm run dev",
-    "install": "npm install && cd backend && npm install && cd ../frontend && npm install"
+    "setup": "cd backend && npm install && cd ../frontend && npm install"
   },
   "keywords": [],
   "author": "",

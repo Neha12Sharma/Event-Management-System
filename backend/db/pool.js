@@ -7,8 +7,7 @@ const pool = new Pool({
 });
 
 pool.on('error', (err) => {
-  console.error('Unexpected DB error', err);
-  process.exit(-1);
+  console.error('Unexpected DB error:', err.message);
 });
 
 module.exports = pool;

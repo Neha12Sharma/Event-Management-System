@@ -242,9 +242,6 @@ export const saveMockUsers = (users) => setStored('eventpro_demo_users', users);
 export const getMockEvents = () => getStored('eventpro_demo_events', INITIAL_EVENTS);
 export const saveMockEvents = (events) => setStored('eventpro_demo_events', events);
 
-export const getMockRegistrations = () => getStored('eventpro_demo_registrations', []);
-export const saveMockRegistrations = (regs) => setStored('eventpro_demo_registrations', regs);
-
 // Mock Auth
 export const mockLogin = (email, password) => {
     const users = getMockUsers();
@@ -400,17 +397,62 @@ export const mockDeleteEvent = (id) => {
     return { message: 'Event deleted' };
 };
 
+export const INITIAL_REGISTRATIONS = [
+    {
+        id: 'reg-demo-1',
+        event_id: 'ev-1',
+        user_id: 'usr-demo',
+        ticket_count: 2,
+        payment_status: 'completed',
+        payment_method: 'UPI QR Scanner',
+        payment_ref: 'UTR984729103847',
+        total_paid: 598.00,
+        title: 'Web Summit 2026',
+        start_date: '2026-05-10T09:00:00Z',
+        location: 'Lisbon, Portugal',
+        venue: 'Altice Arena',
+        image_url: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
+        category_name: 'Conference',
+        category_color: '#6366f1',
+        created_at: new Date(Date.now() - 86400000 * 2).toISOString()
+    },
+    {
+        id: 'reg-demo-2',
+        event_id: 'ev-7',
+        user_id: 'usr-demo',
+        ticket_count: 1,
+        payment_status: 'free',
+        payment_method: 'Free',
+        payment_ref: 'FREE-ENTRY',
+        total_paid: 0,
+        title: 'Modern Art Exhibition: Visions 2026',
+        start_date: '2026-03-05T10:00:00Z',
+        location: 'London, UK',
+        venue: 'Tate Modern',
+        image_url: 'https://images.unsplash.com/photo-1531913764164-f85c13636f5f?w=800&q=80',
+        category_name: 'Art & Culture',
+        category_color: '#8b5cf6',
+        created_at: new Date(Date.now() - 86400000 * 5).toISOString()
+    }
+];
+
+export const getMockRegistrations = () => getStored('eventpro_demo_registrations', INITIAL_REGISTRATIONS);
+export const saveMockRegistrations = (regs) => setStored('eventpro_demo_registrations', regs);
+
 // Mock Registrations
-export const mockCreateRegistration = (eventId, ticketCount = 1, user) => {
+export const mockCreateRegistration = (eventId, ticketCount = 1, user, paymentRef = '') => {
     const regs = getMockRegistrations();
     const event = mockGetEventById(eventId);
 
+    const isFree = Number(event.price) === 0;
     const newReg = {
         id: 'reg-' + Date.now(),
         event_id: eventId,
         user_id: user?.id || 'usr-demo',
         ticket_count: ticketCount,
-        payment_status: Number(event.price) === 0 ? 'free' : 'completed',
+        payment_status: isFree ? 'free' : 'completed',
+        payment_method: isFree ? 'Free Pass' : 'UPI QR Scanner',
+        payment_ref: paymentRef || (isFree ? 'FREE-PASS' : 'UTR' + Math.floor(100000000000 + Math.random() * 900000000000)),
         total_paid: Number(event.price) * ticketCount,
         title: event.title,
         start_date: event.start_date,
