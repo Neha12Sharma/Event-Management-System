@@ -4,7 +4,7 @@
   "description": "EventPro – Full-stack Event Organization System",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "cd frontend && npm install && npm run build",
+    "build": "cd backend && npm install && cd ../frontend && npm install && npm run build",
     "server": "cd backend && npm run dev",
     "client": "cd frontend && npm run dev",
     "setup": "cd backend && npm install && cd ../frontend && npm install"
